@@ -8,7 +8,7 @@ open FsHttp.DslCE
 
 open FSharp.Data
 
-//0 0 12 * * 3
+//*/20 * * * * *
 
 type Pleroma = JsonProvider<"./sampleStatuses.json">
 
@@ -25,7 +25,7 @@ module TootTimer =
            "今日は水曜日だ" |]
 
     [<FunctionName("WednesdayToot")>]
-    let run([<TimerTrigger("*/20 * * * * *")>]myTimer: TimerInfo, log: ILogger) =
+    let run([<TimerTrigger("0 0 12 * * 3")>]myTimer: TimerInfo, log: ILogger) =
         let config = ConfigurationBuilder()
                          .AddJsonFile("local.settings.json", optional = true, reloadOnChange = true)
                          .AddEnvironmentVariables()
@@ -54,7 +54,11 @@ module TootTimer =
             formUrlEncoded [
                 "status", sprintf """%s
 
-                extra stuff
+
+
+
+---
+This is a bot. See a mistake or want to add your own language? Submit an issue or PR here: https://github.com/kaeedo/WednesdayBot
                 """ messages.[messagesIndex lastMessage]
             ]
         } |> ignore
