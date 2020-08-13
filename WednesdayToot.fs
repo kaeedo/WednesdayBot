@@ -13,15 +13,16 @@ open FSharp.Data
 type Pleroma = JsonProvider<"./sampleStatuses.json">
 
 module TootTimer =
+    // Automagically translated using Deepl.
     let private messages =
-        [| "It is Wednesday, my dudes"
-           "Es ist Mittwoch, meine Kerle"
-           "C'est mercredi, mes amis"
-           "Es miércoles, mis amigos"
-           "E' mercoledì, amici miei"
-           "Het is woensdag, mijn jongens"
-           "Jest środa, kolesie"
-           "Сегодня среда, чуваки"
+        [| "It is #Wednesday, my dudes"
+           "Es ist #Mittwoch, meine Kerle"
+           "C'est #mercredi, mes amis"
+           "Es #miércoles, mis amigos"
+           "E' #mercoledì, amici miei"
+           "Het is #woensdag, mijn jongens"
+           "Jest #środa, kolesie"
+           "Сегодня #среда, чуваки"
            "今日は水曜日だ" |]
 
     [<FunctionName("WednesdayToot")>]
