@@ -14,7 +14,7 @@ type Pleroma = JsonProvider<"./sampleStatuses.json">
 
 module TootTimer =
     // Automagically translated using Deepl.
-    let private messages =
+    let messages =
         [| "It is #Wednesday, my dudes"
            "Es ist #Mittwoch, meine Kerle"
            "C'est #mercredi, mes amis"
@@ -22,8 +22,7 @@ module TootTimer =
            "E' #mercoledì, amici miei"
            "Het is #woensdag, mijn jongens"
            "Jest #środa, kolesie"
-           "Сегодня #среда, чуваки"
-           "今日は水曜日だ" |]
+           "Сегодня #среда, чуваки" |]
 
     [<FunctionName("WednesdayToot")>]
     let run([<TimerTrigger("0 0 12 * * 3")>]myTimer: TimerInfo, log: ILogger) =
@@ -43,7 +42,10 @@ module TootTimer =
 
         let messagesIndex (lastMessage: string) =
             messages
-            |> Array.tryFindIndex (fun m -> lastMessage.Contains(m))
+            |> Array.tryFindIndex (fun m ->
+                let start = lastMessage.Substring(0, lastMessage.IndexOf("<"))
+                m.StartsWith(start)
+            )
             |> Option.map (fun i -> if i + 1 < messages.Length then i + 1 else 0)
             |> Option.defaultValue 0
 
