@@ -58,5 +58,4 @@ module TootTimer =
                 "status", messages.[messagesIndex lastMessage]
             ]
         } |> ignore
-
         ()
