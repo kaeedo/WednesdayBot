@@ -44,7 +44,7 @@ module TootTimer =
             messages
             |> Array.tryFindIndex (fun m ->
                 let start = lastMessage.Substring(0, lastMessage.IndexOf("<"))
-                m.StartsWith(start)
+                m.Substring(0, m.IndexOf("#")) = start
             )
             |> Option.map (fun i -> if i + 1 < messages.Length then i + 1 else 0)
             |> Option.defaultValue 0
